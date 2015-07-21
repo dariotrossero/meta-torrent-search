@@ -10,7 +10,7 @@ class ExtraTorrent
 {
 
     private $url = 'http://extratorrent.cc';
-    private $name = 'ExtraTorrent';
+    public $name = 'ExtraTorrent';
 
     /**
      * @return string
@@ -29,13 +29,28 @@ class ExtraTorrent
     }
 
 
-
     public function search($query)
     {
         $url = $this->url . '/advanced_search/?with=' . $query;
         $response = file_get_contents($url);
-        #table.tl>tbody tr
+        $dom = new DOMDocument();
+        @$dom->loadHTML($response);
+        $tables = $dom->getElementsByTagName('table');
+        $rows = $tables->item(19)->getElementsByTagName('tr');
 
+        // loop over the table rows
+        $results = Array();
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td');
+            foreach ($cols->item(0)->getElementsByTagName('a') as $a)
+                $link = $this->getUrl() . $a->getAttribute('href') . "<br />";
+            $title = $cols->item(2)->getElementsByTagName('a')->item(1)->nodeValue;
+            $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
+            $seeds = $cols->item(4)->nodeValue;
+            $peers = $cols->item(5)->nodeValue;
+            array_push($results, [$title, $link, $size, $seeds, $peers]);
+        }
 
+        return $results;
     }
 }
