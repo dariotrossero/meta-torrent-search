@@ -2,21 +2,20 @@
 function get_engines()
 {
     $basePath = 'engines';
-    $i = 0;
     if ($handle = opendir($basePath)) {
         while (false !== ($entry = readdir($handle))) {
             if ($entry != "." && $entry != ".." && stripos($entry, '.php') !== false) {
 
                 include_once("$basePath/" . $entry);
                 $className = str_ireplace('.php', '', $entry);
-                $parsers[$i] = new $className();
-                $i++;
+                $obj = new $className();
+                $name = $obj->getName();
+                $parsers[$name] = $obj;
             }
         }
         closedir($handle);
     }
-
-return $parsers;
+    return $parsers;
 }
 ?>
 
@@ -25,19 +24,20 @@ return $parsers;
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="query" name="query" type="text">
+                    <input id="query" name="query" type="text" value="<?php echo (isset($_POST['query']) ? $_POST['query'] : ''); ?>">
                     <label for="query">Buscar torrent</label>
+
                     <p>
                         <?php
                         $search_engines = get_engines();
-
                         $i = 1;
-                        foreach ($search_engines as $engine) {
-                            $name = $engine->getName();
-                            echo '<input type="checkbox" class="filled-in" id="filled-in-box'.$i.'" checked="checked"/>';
-                            echo '<label for="filled-in-box'.$i.'">'.$name.'</label>';
+                        foreach ($search_engines as $eng) {
+                            $name = $eng->getName();
+                            $checked = (isset($_POST[$name]) ? 'checked="checked"' : '');
+                            echo '<input type="checkbox"  name="' . $name . '" id="filled-in-box' . $i . '" '.$checked.'/>';
+                            echo '<label for="filled-in-box' . $i . '">' . $name . '</label>';
                             $i++;
-                         } ?>
+                        } ?>
                     </p>
 
                     <p>

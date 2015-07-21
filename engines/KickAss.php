@@ -24,7 +24,13 @@ class KickAss
         return $this->name;
     }
     private $url = "https://kat.cr";
-    public $name = "Kickass Torrents";
+    public $name = "Kickass_Torrents";
+
+    function human_filesize($bytes, $decimals = 2) {
+        $size = array('b','Kb','Mb','Gb','TB','PB','EB','ZB','YB');
+        $factor = floor((strlen($bytes) - 1) / 3);
+        return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
+    }
 
 
     public function search($query)
@@ -40,7 +46,7 @@ class KickAss
         for ($i = 1; $i <= $pages; $i++) {
             foreach ($json_obj->list as $obj) {
                 $link = substr($obj->torrentLink, 0, strpos($obj->torrentLink, '?'));
-                array_push($results, [$obj->title, $link, $obj->size, $obj->seeds, $obj->peers]);
+                array_push($results, [$obj->title, $link, $this->human_filesize($obj->size), $obj->seeds, $obj->peers]);
             }
         }
         return $results;
