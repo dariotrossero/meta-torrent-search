@@ -21,6 +21,7 @@
     <?php
     require('engines/PirateBay.php');
     require('engines/KickAss.php');
+    include('engines/TorrentReactor.php');
     require('engines/ExtraTorrent.php');
     include('search_section.php');
     if (isset($_POST['query']))
