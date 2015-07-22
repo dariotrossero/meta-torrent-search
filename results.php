@@ -18,13 +18,11 @@
 
 ?>
 <div class="container">
-
     <?php
+    require('engines/PirateBay.php');
     require('engines/KickAss.php');
     require('engines/ExtraTorrent.php');
     include('search_section.php');
-
-
     if (isset($_POST['query']))
         echo("Mostrando resultados para: <b>" . $_POST['query'] . "</b><br />\n");
 
@@ -39,7 +37,7 @@
             echo "<td><a href='$obj[1]' onclick=\"return saveLink('$obj[1]', 'movie');\"> <i class='material-icons'>movie</i></a>  ";
             echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]', 'tv_show');\"><i class='material-icons'>video_library</i></a>";
             echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]', 'other');\"><i class='material-icons'>description</i></a></td>";
-            echo "<td>" . $engine->getName() . "</td>";
+            echo "<td>" . str_replace("_", " ", $engine->getName()) . "</td>";
             echo "</tr>";
         }
     }
