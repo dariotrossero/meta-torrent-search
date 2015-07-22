@@ -14,7 +14,8 @@
 <script type="text/javascript" src="js/materialize.min.js"></script>
 
 <div class="container">
-    <?php include('search_section.php'); ?>
+    <?php
+    include('search_section.php'); ?>
 </div>
 <?php include('layouts/footer.php'); ?>
 </body>
