@@ -37,7 +37,7 @@ function get_engines()
                             $name = $eng->getName();
                             $checked = (isset($_POST[$name]) ? 'checked="checked"' : '');
                             echo '<input type="checkbox"  name="' . $name . '" id="filled-in-box' . $i . '" ' . $checked . '/>';
-                            echo '<label for="filled-in-box' . $i . '">' . $name . '</label>';
+                            echo '<label for="filled-in-box' . $i . '">' . str_replace("_", " ", $name) . '</label>';
                             $i++;
                         } ?>
                     </p>
