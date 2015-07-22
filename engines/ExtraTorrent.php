@@ -43,7 +43,7 @@ class ExtraTorrent
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td');
             foreach ($cols->item(0)->getElementsByTagName('a') as $a)
-                $link = $this->getUrl() . $a->getAttribute('href') . "<br />";
+                $link = str_replace("torrent_", "", $this->getUrl() . $a->getAttribute('href'));
             $title = $cols->item(2)->getElementsByTagName('a')->item(1)->nodeValue;
             $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
             $seeds = $cols->item(4)->nodeValue;
