@@ -17,6 +17,7 @@ function get_engines()
     }
     return $parsers;
 }
+
 ?>
 
 <form class="col s12" method="post" action="results.php">
@@ -24,7 +25,8 @@ function get_engines()
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="query" name="query" type="text" value="<?php echo (isset($_POST['query']) ? $_POST['query'] : ''); ?>">
+                    <input id="query" name="query" type="text"
+                           value="<?php echo(isset($_POST['query']) ? $_POST['query'] : ''); ?>">
                     <label for="query">Buscar torrent</label>
 
                     <p>
@@ -34,7 +36,7 @@ function get_engines()
                         foreach ($search_engines as $eng) {
                             $name = $eng->getName();
                             $checked = (isset($_POST[$name]) ? 'checked="checked"' : '');
-                            echo '<input type="checkbox"  name="' . $name . '" id="filled-in-box' . $i . '" '.$checked.'/>';
+                            echo '<input type="checkbox"  name="' . $name . '" id="filled-in-box' . $i . '" ' . $checked . '/>';
                             echo '<label for="filled-in-box' . $i . '">' . $name . '</label>';
                             $i++;
                         } ?>

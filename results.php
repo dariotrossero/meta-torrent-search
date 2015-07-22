@@ -10,6 +10,9 @@
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/jquery-latest.js"></script>
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/main.css"/>
+
 <?php
 
 
@@ -33,7 +36,9 @@
             echo "<td>$obj[2]</td>";
             echo "<td>$obj[3]</td>";
             echo "<td>$obj[4]</td>";
-            echo "<td><a href='$obj[1]' onclick=\"return saveLink('$obj[1]');\">Link</a></td>";
+            echo "<td><a href='$obj[1]' onclick=\"return saveLink('$obj[1]', 'movie');\"> <i class='material-icons'>movie</i></a>  ";
+            echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]', 'tv_show');\"><i class='material-icons'>video_library</i></a>";
+            echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]', 'other');\"><i class='material-icons'>description</i></a></td>";
             echo "<td>" . $engine->getName() . "</td>";
             echo "</tr>";
         }
@@ -53,7 +58,7 @@
         </thead>
         <tbody>
         <?php
-        foreach($search_engines as $item) {
+        foreach ($search_engines as $item) {
             if (isset($_POST[$item->getName()]))
                 generate_table($item->search(urlencode($_POST['query'])), $item);
         }
@@ -67,14 +72,16 @@
 </body>
 
 <script>
-    function saveLink(link) {
-        console.log(link);
+    function saveLink(link, type) {
 
         $.ajax({
             type: "POST",
             url: 'save_results.php',
             data: {
-                data: link
+                data: {
+                    link,
+                    type
+                }
             },
             cache: false,
             success: function (respuesta) {
@@ -90,8 +97,3 @@
     );
 
 </script>
-<style>
-    thead {
-        cursor: pointer;
-    }
-</style>

@@ -1,0 +1,10 @@
+
+[type="checkbox"] + label {
+    padding-right: 34px;
+}
+thead {
+    cursor: pointer;
+}
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
