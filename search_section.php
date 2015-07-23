@@ -26,7 +26,8 @@ function get_engines()
             <div class="row">
                 <div class="input-field col">
                     <input id="query" name="query" type="text"
-                           value="<?php echo(isset($_POST['query']) ? $_POST['query'] : ''); ?>"><button class="btn waves-effect waves-light" type="submit" name="action">Buscar</button>
+                           value="<?php echo(isset($_POST['query']) ? $_POST['query'] : ''); ?>">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Buscar</button>
                     <label for="query">Buscar torrent</label>
 
                     <p>
@@ -45,3 +46,4 @@ function get_engines()
             </div>
     </div>
 </form>
+

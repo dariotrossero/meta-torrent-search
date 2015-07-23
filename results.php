@@ -13,16 +13,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="css/main.css"/>
 
-<?php
-
-
-?>
 <div class="container">
     <?php
-    require('engines/PirateBay.php');
-    require('engines/KickAss.php');
-    include('engines/TorrentReactor.php');
-    require('engines/ExtraTorrent.php');
     include('search_section.php');
     if (isset($_POST['query']))
         echo("Mostrando resultados para: <b>" . $_POST['query'] . "</b><br />\n");
