@@ -48,7 +48,8 @@ class ExtraTorrent
             $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
             $seeds = $cols->item(4)->nodeValue;
             $peers = $cols->item(5)->nodeValue;
-            array_push($results, [$title, $link, $size, $seeds, $peers]);
+            if ($link!="")
+                array_push($results, [$title, $link, $size, $seeds, $peers]);
         }
 
         return $results;

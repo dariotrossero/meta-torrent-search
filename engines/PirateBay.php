@@ -41,11 +41,16 @@ class PirateBay
         $results = Array();
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td');
-            try {
-                var_dump($cols->item(1));
-            } catch (Exception $e) {
+            if ($cols->item(1) != NULL) {
+                $t = $cols->item(1)->getElementsByTagName('div');
+                $title=$t->item(0)->nodeValue;
+                $k = $cols->item(1)->getElementsByTagName('a');
+                $magnet_link = $k->item(1)->getAttribute('href');
+                $seeders=$cols->item(2)->nodeValue;
+                $peers=$cols->item(3)->nodeValue;
+                
+            
             }
-
         }
 
     }

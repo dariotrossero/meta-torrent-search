@@ -12,13 +12,14 @@
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="css/main.css"/>
-
+<?php include('header.php'); ?>
 <div class="container">
     <?php
     include('search_section.php');
     if (isset($_POST['query']))
-        echo("Mostrando resultados para: <b>" . $_POST['query'] . "</b><br />\n");
-
+        echo("Mostrando resultados para: <b>" . $_POST['query'] . "</b><br />\n"); ?>
+	<span id="rows"></span>
+<?php
     function generate_table($array, $engine)
     {
         foreach ($array as $obj) {
@@ -77,6 +78,9 @@
             cache: false,
             success: function (respuesta) {
                 console.log(respuesta);
+                if (respuesta == 0) alert("ok");
+		else
+			alert("Error");
             }
         });
 
@@ -87,4 +91,6 @@
         }
     );
 
+rows = $('tbody tr').length;
+$('#rows').text(rows+' resultados');
 </script>
