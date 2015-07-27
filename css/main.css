@@ -8,3 +8,6 @@ thead {
 a, a:visited, a:hover, a:active {
     color: inherit;
 }
+.indeterminate {
+    display: none;
+}

@@ -19,6 +19,10 @@
     if (isset($_POST['query']))
         echo("Mostrando resultados para: <b>" . $_POST['query'] . "</b><br />\n"); ?>
 	<span id="rows"></span>
+
+    <div class="progress">
+        <div class="indeterminate"></div>
+    </div>
 <?php
     function generate_table($array, $engine)
     {
@@ -64,6 +68,19 @@
 </body>
 
 <script>
+
+    $(document).ajaxStart(function () {
+        $(".indeterminate").show();
+    });
+
+    /**
+     * Cuando termina la peticion ajax oculto la animacion de carga
+     */
+    $(document).ajaxComplete(function () {
+        $(".indeterminate").hide();
+    });
+
+
     function saveLink(link, type) {
 
         $.ajax({
@@ -78,7 +95,7 @@
             cache: false,
             success: function (respuesta) {
                 console.log(respuesta);
-                if (respuesta == 0) alert("ok");
+                if (respuesta == 0) alert("Torrent descargado");
 		else
 			alert("Error");
             }
