@@ -46,7 +46,7 @@ class KickAss
         for ($i = 1; $i <= $pages; $i++) {
             foreach ($json_obj->list as $obj) {
                 $link = substr($obj->torrentLink, 0, strpos($obj->torrentLink, '?'));
-                array_push($results, [$obj->title, $link, $this->human_filesize($obj->size), $obj->seeds, $obj->peers]);
+		$results[$link] = [$obj->title, $link, $this->human_filesize($obj->size), $obj->seeds, $obj->peers];
             }
         }
         return $results;
