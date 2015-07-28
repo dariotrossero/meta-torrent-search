@@ -6,7 +6,7 @@
  * Date: 20/07/15
  * Time: 10:20
  */
-class KickAss
+class Strike
 {
     /**
      * @return string
@@ -24,8 +24,8 @@ class KickAss
         return $this->name;
     }
 
-    private $url = "https://kat.cr";
-    public $name = "KickAss";
+    private $url = "https://getstrike.net";
+    public $name = "Strike";
 
     function human_filesize($bytes, $decimals = 2)
     {
@@ -37,28 +37,23 @@ class KickAss
 
     public function search($query)
     {
-        $url = $this->url . '/json.php?q=' . $query;
+        $url = $this->url . '/api/v2/torrents/search/?phrase=' . $query;
         $json_response = file_get_contents($url);
         $json_obj = json_decode($json_response);
-        $total_results = $json_obj->total_results;
-        $pages = $total_results / 25;
+        $total_results = $json_obj->results;
         $results = Array();
-
-
-        for ($i = 1; $i <= $pages; $i++) {
-            foreach ($json_obj->list as $obj) {
-                $link = substr($obj->torrentLink, 0, strpos($obj->torrentLink, '?'));
-                $results[$link] = [$obj->title, $link, $this->human_filesize($obj->size), $obj->seeds, $obj->peers];
-            }
+        foreach ($json_obj->torrents as $obj) {
+            $results[$obj->torrent_hash] = [$obj->torrent_title, $obj->torrent_hash, $this->human_filesize($obj->size), $obj->seeds, $obj->leeches];
         }
         return $results;
-
 
     }
 
     public function get_torrent($hash)
     {
-        return $hash;
+        $url = $this->url . '/api/v2/torrents/download/?hash=' . $hash;
+        $json_response = file_get_contents($url);
+        $json_obj = json_decode($json_response);
+        return $json_obj->message;
     }
-
 }

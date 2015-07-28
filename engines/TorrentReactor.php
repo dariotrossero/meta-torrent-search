@@ -55,4 +55,10 @@ class TorrentReactor
         }
         return $results;
     }
+
+    public function get_torrent($hash)
+    {
+        return $hash;
+    }
+
 }

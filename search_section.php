@@ -5,7 +5,6 @@ function get_engines()
     if ($handle = opendir($basePath)) {
         while (false !== ($entry = readdir($handle))) {
             if ($entry != "." && $entry != ".." && stripos($entry, '.php') !== false) {
-
                 include_once("$basePath/" . $entry);
                 $className = str_ireplace('.php', '', $entry);
                 $obj = new $className();

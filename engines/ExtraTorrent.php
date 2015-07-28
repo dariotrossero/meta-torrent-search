@@ -48,10 +48,17 @@ class ExtraTorrent
             $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
             $seeds = $cols->item(4)->nodeValue;
             $peers = $cols->item(5)->nodeValue;
-            if (link!="" and $seeds!="--" and ($seeds!=0 and $peers!=0))
+            if (link != "" and $seeds != "--" and ($seeds != 0 and $peers != 0))
                 array_push($results, [$title, $link, $size, $seeds, $peers]);
         }
 
         return $results;
     }
+
+    public function get_torrent($hash)
+    {
+        return $hash;
+    }
+
+
 }

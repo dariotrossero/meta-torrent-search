@@ -56,4 +56,9 @@ class PirateBay
 	return $results;
     }
 
+    public function get_torrent($hash)
+    {
+        return $hash;
+    }
+
 }
