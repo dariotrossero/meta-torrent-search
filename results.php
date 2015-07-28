@@ -16,8 +16,9 @@
 <div class="container">
     <?php
     include('search_section.php');
-    if (isset($_POST['query']))
-        echo("Mostrando resultados para: <b>" . $_POST['query'] . "</b><br />\n"); ?>
+    if (isset($_POST['query'])) 
+        echo("Mostrando resultados para: <b>" . $_POST['query'] . "</b><br />\n");  ?>
+
 	<span id="rows"></span>
 
     <div class="progress">
@@ -105,6 +106,8 @@
     }
     $(document).ready(function () {
             $("#results").tablesorter();
+	    height=$( window ).height();
+	    $('.container').css({'min-height':height});
         }
     );
 

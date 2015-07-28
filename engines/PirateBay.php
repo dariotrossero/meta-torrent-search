@@ -49,10 +49,11 @@ class PirateBay
                 $seeders=$cols->item(2)->nodeValue;
                 $peers=$cols->item(3)->nodeValue;
                 
-            
+            //array_push($results, [$title, $magnet_link, $seeders, $peers]);
             }
+		
         }
-
+	return $results;
     }
 
 }
