@@ -33,9 +33,9 @@
             echo "<td>$obj[2]</td>";
             echo "<td>$obj[3]</td>";
             echo "<td>$obj[4]</td>";
-            echo "<td><a href='$obj[1]' onclick=\"return saveLink('$obj[1]','movie','".$engine->getName()."');\"> <i class='material-icons'>movie</i></a>  ";
-            echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]','tv_show','".$engine->getName()."');\"><i class='material-icons'>video_library</i></a>";
-            echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]','other','".$engine->getName()."');\"><i class='material-icons'>description</i></a></td>";
+            echo "<td><a href='$obj[1]' onclick=\"return saveLink('$obj[1]','movie','".str_replace("_", "", $engine->getName())."');\"> <i class='material-icons'>movie</i></a>  ";
+            echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]','tv_show','".str_replace("_", "", $engine->getName())."');\"><i class='material-icons'>video_library</i></a>";
+            echo "<a href='$obj[1]' onclick=\"return saveLink('$obj[1]','other','".str_replace("_", "", $engine->getName())."');\"><i class='material-icons'>description</i></a></td>";
             echo "<td>" . str_replace("_", " ", $engine->getName()) . "</td>";
             echo "</tr>";
         }

@@ -56,21 +56,26 @@ class MiniNova
         $table = $dom->getElementsByTagName('table');
         $results = Array();
         if ($table->length) {
-        $rows = $table->item(0)->getElementsByTagName('tr');
-        // loop over the table rows
-        $total_elements = $rows->length;
-        for ($i = 1; $i < $total_elements; $i++) {
-            $cols = $rows->item($i)->getElementsByTagName('td');
-            $title = $cols->item(2)->getElementsByTagName('a')->item(2)->nodeValue;
-            $link = $this->get_links($cols->item(2));
-            $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
-            $seeds = $cols->item(4)->nodeValue;
-            $peers = $cols->item(5)->nodeValue;
-            $temp = str_replace("/tor/", "/get/", $link);
-            $link = substr_replace($temp, "", -2);
-            array_push($results, [$title, $this->getUrl() . $link, $size, $seeds, $peers]);
-        }
+            $rows = $table->item(0)->getElementsByTagName('tr');
+            // loop over the table rows
+            $total_elements = $rows->length;
+            for ($i = 1; $i < $total_elements; $i++) {
+                $cols = $rows->item($i)->getElementsByTagName('td');
+                $title = $cols->item(2)->getElementsByTagName('a')->item(2)->nodeValue;
+                $link = $this->get_links($cols->item(2));
+                $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
+                $seeds = $cols->item(4)->nodeValue;
+                $peers = $cols->item(5)->nodeValue;
+                $temp = str_replace("/tor/", "/get/", $link);
+                $link = substr_replace($temp, "", -2);
+                array_push($results, [$title, $this->getUrl() . $link, $size, $seeds, $peers]);
+            }
         }
         return $results;
+    }
+
+    public function get_torrent($hash)
+    {
+        return $hash;
     }
 }
