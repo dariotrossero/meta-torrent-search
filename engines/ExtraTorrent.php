@@ -37,19 +37,22 @@ class ExtraTorrent
         @$dom->loadHTML($response);
         $tables = $dom->getElementsByTagName('table');
         $rows = $tables->item(19)->getElementsByTagName('tr');
-
         // loop over the table rows
         $results = Array();
         foreach ($rows as $row) {
-            $cols = $row->getElementsByTagName('td');
-            foreach ($cols->item(0)->getElementsByTagName('a') as $a)
-                $link = str_replace("torrent_", "", $this->getUrl() . $a->getAttribute('href'));
-            $title = $cols->item(2)->getElementsByTagName('a')->item(1)->nodeValue;
-            $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
-            $seeds = $cols->item(4)->nodeValue;
-            $peers = $cols->item(5)->nodeValue;
-            if (link != "" and $seeds != "--" and ($seeds != 0 and $peers != 0))
-                array_push($results, [$title, $link, $size, $seeds, $peers]);
+            if ($row->nodeValue != "No torrents") {
+                $cols = $row->getElementsByTagName('td');
+
+                foreach ($cols->item(0)->getElementsByTagName('a') as $a)
+                    $link = str_replace("torrent_", "", $this->getUrl() . $a->getAttribute('href'));
+                $title = $cols->item(2)->getElementsByTagName('a')->item(1)->nodeValue;
+                $size = str_replace(chr(194), " ", $cols->item(3)->nodeValue);
+                $seeds = $cols->item(4)->nodeValue;
+                $peers = $cols->item(5)->nodeValue;
+                if (link != "" and $seeds != "--" and ($seeds != 0 and $peers != 0))
+                    array_push($results, [$title, $link, $size, $seeds, $peers]);
+            } else
+                break;
         }
 
         return $results;

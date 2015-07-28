@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Meta Torrent Search</title>
+    <title>Torrent Meta Search</title>
 <head>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
