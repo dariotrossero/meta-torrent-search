@@ -54,9 +54,10 @@ class MiniNova
         $dom = new DOMDocument();
         @$dom->loadHTML($response);
         $table = $dom->getElementsByTagName('table');
+        $results = Array();
+        if ($table->length) {
         $rows = $table->item(0)->getElementsByTagName('tr');
         // loop over the table rows
-        $results = Array();
         $total_elements = $rows->length;
         for ($i = 1; $i < $total_elements; $i++) {
             $cols = $rows->item($i)->getElementsByTagName('td');
@@ -69,7 +70,7 @@ class MiniNova
             $link = substr_replace($temp, "", -2);
             array_push($results, [$title, $this->getUrl() . $link, $size, $seeds, $peers]);
         }
-
+        }
         return $results;
     }
 }
